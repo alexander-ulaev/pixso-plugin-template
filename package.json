@@ -1,0 +1,25 @@
+{
+  "name": "vite-project-preact",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build && vite build --config vite.pixso.config.ts",
+    "build:main": "tsc -b && vite build",
+    "build:pixso": "vite build --config vite.pixso.config.ts",
+    "preview": "vite preview",
+    "start": "pps hmr"
+  },
+  "dependencies": {
+    "@picocss/pico": "^2.1.1",
+    "preact": "^10.27.2"
+  },
+  "devDependencies": {
+    "@pixso/dev-server": "^0.0.4",
+    "@preact/preset-vite": "^2.10.2",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.7",
+    "vite-plugin-singlefile": "^2.3.0"
+  }
+}

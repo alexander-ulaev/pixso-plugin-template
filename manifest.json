@@ -1,0 +1,18 @@
+{
+    "name": "тут будет mcp",
+    "id": "hello.world.plugin",
+    "version": "1.0.0",
+    "author": "Your Name",
+    "description": "Simple Hello World plugin for Pixso",
+    "main": "./dist/main.js",
+    "ui": "./dist/index.html",
+    "permissions": ["activeDocument", "currentPage", "currentSelection"],
+    "commands": [
+        {
+            "name": "Show Hello World",
+            "id": "show-hello-world",
+            "description": "Show the Hello World plugin UI",
+            "action": "show-hello-world"
+        }
+    ]
+}
