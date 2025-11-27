@@ -1,7 +1,6 @@
 import express from 'express';
 import expressWs from 'express-ws';
-import path from 'path';
-import { getUIStaticPath, getStaticPath, PLUGIN_DEV_PORT } from './config';
+import { UI_HTML, MAIN_JS, PLUGIN_DEV_PORT, getManifest } from './config';
 import { setupWebSocket } from './websocket';
 import { startWatch } from './watch';
 import type { Middleware } from './types';
@@ -21,19 +20,18 @@ export const setupDevServer = (middleware?: Middleware): void => {
   // Start file watching
   startWatch();
 
-  // Serve static files from the UI directory
-  const staticPath = path.resolve(process.cwd(), getStaticPath());
-  app.use(express.static(staticPath, {
-    setHeaders: (res) => {
-      res.setHeader('Cache-Control', 'no-store');
-    },
-    index: false
-  }));
+  // Serve the main JS file
+  app.get('*/main.js', (req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Content-Type', 'application/javascript');
+    res.send(MAIN_JS);
+  });
 
   // Serve the main UI file for all other routes
   app.get('*', (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
-    res.sendFile(getUIStaticPath());
+    res.setHeader('Content-Type', 'text/html');
+    res.send(UI_HTML);
   });
 
   // Start the server

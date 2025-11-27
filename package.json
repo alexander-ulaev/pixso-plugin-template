@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@picocss/pico": "^2.1.1",
+    "js-base64": "^3.7.8",
     "preact": "^10.27.2"
   },
   "devDependencies": {

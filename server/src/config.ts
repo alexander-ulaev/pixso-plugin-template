@@ -1,33 +1,21 @@
 // src/config.ts
-import path from 'path';
-import fs from 'fs';
 import { createHooks } from 'hookable';
-import jiti from 'jiti';
+
+// These will be injected by the build script
+declare const __UI_HTML__: string;
+declare const __MAIN_JS__: string;
+declare const __MANIFEST__: PluginManifest;
+
+export const UI_HTML = __UI_HTML__;
+export const MAIN_JS = __MAIN_JS__;
 
 export interface PluginManifest {
   ui: string;
   main: string | { sandbox: string; host?: string };
 }
 
-const root = process.cwd();
-const resolveModule = (p: string) => jiti(root)(p).default;
-
 export const getManifest = (): PluginManifest => {
-  return resolveModule('./manifest.json');
-};
-
-export const getUIStaticPath = (): string => {
-  const { ui } = getManifest();
-  return path.resolve(root, ui);
-};
-
-export const getStaticPath = (): string => {
-  const { ui } = getManifest();
-  return path.join(ui, '../');
-};
-
-export const getFile = (p?: string): string => {
-  return fs.readFileSync(path.resolve(root, p || ''), 'utf8');
+  return __MANIFEST__;
 };
 
 export const PLUGIN_DEV_PORT = 5201;

@@ -1,4 +1,5 @@
 import expressWs from 'express-ws';
+import { WebSocket } from 'ws';
 import { hooks } from './config';
 import type { FileType } from './types';
 
