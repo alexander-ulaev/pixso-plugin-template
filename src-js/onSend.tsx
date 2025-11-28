@@ -25,7 +25,12 @@ export const onSendNodes = async (message: any) => {
 
     const rawJsonNodes = await getAllJsonNodes(selection)
 
-    console.log("rawJsonNodes!!!!", JSON.stringify(rawJsonNodes));
+    // console.log("rawJsonNodes!!!!", JSON.stringify(rawJsonNodes));
+
+    console.log("rawJsonNodes", JSON.stringify(rawJsonNodes, (key, value) => {
+      if (key === 'parent') return undefined;
+      return value;
+    }))
 
     // Example PluginSettings
     // const settings: PluginSettings = {

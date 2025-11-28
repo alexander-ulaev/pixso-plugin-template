@@ -1,4 +1,4 @@
-export function nodeToJson(node: any) {
+export function nodeToJson(node: any, parent?: any) {
     const info: any = {
         id: node.id,
         name: node.name,
@@ -10,7 +10,8 @@ export function nodeToJson(node: any) {
         width: node.width,
         height: node.height,
         rotation: node.rotation,
-        opacity: node.opacity
+        opacity: node.opacity,
+        parent: parent
     };
 
     // Стили и свойства в зависимости от типа элемента
@@ -54,6 +55,7 @@ export function nodeToJson(node: any) {
                 characters: node.characters,
                 fontSize: node.fontSize,
                 fontName: node.fontName,
+                fontWeight: node.fontWeight,
                 textAlign: node.textAlign,
                 textAlignVertical: node.textAlignVertical,
                 lineHeight: node.lineHeight,
@@ -126,7 +128,7 @@ const getAllChildren = async (node: any) => {
 
     // if ('children' in node) {
     for (const child of childrenArray) {
-        const childInfo = nodeToJson(child);
+        const childInfo = nodeToJson(child, node);
     // console.log("childInfo 0", childInfo);
 
         // const childInfo = child;
@@ -152,7 +154,7 @@ const getAllChildren = async (node: any) => {
 }
 
 
-const extractStyledTextSegments = (node: TextNode) => {
+const extractStyledTextSegments = (node: any) => {
   return [
     {
       characters: node.characters,
